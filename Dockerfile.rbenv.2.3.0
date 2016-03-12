@@ -1,0 +1,44 @@
+# https://hub.docker.com/r/stefansundin/rbenv/
+# docker build -f Dockerfile.rbenv.2.3.0 -t stefansundin/rbenv:2.3.0 .
+# docker push stefansundin/rbenv:2.3.0
+
+FROM ubuntu:14.04
+MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update
+# rbenv and ruby-build dependencies
+RUN apt-get install -y git curl build-essential
+# install some gem dependencies
+RUN apt-get install -y libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev
+
+# install rbenv to /usr/local/rbenv
+ENV RBENV_ROOT=/usr/local/rbenv
+RUN git clone https://github.com/rbenv/rbenv.git $RBENV_ROOT
+RUN git clone https://github.com/rbenv/ruby-build.git $RBENV_ROOT/plugins/ruby-build
+RUN git clone https://github.com/rkh/rbenv-update.git $RBENV_ROOT/plugins/rbenv-update
+#RUN git clone https://github.com/ianheggie/rbenv-binstubs.git $RBENV_ROOT/plugins/rbenv-binstubs
+ENV PATH $RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH
+
+# gem-rehash needs to be able to write to the shims directory
+RUN mkdir $RBENV_ROOT/shims
+RUN chmod 777 $RBENV_ROOT/shims
+
+# install ruby
+RUN rbenv install 2.3.0
+RUN rbenv global 2.3.0
+
+RUN gem install bundler
+
+# create a user with /app as home
+RUN useradd -m -d /app -p user -s /bin/bash user
+USER user
+WORKDIR /app
+
+# you may want to overwrite this in your Dockerfile
+ENV RACK_ENV=production
+ENV RAILS_ENV=production
+
+# docker run -i -t stefansundin/rbenv:2.3.0
+CMD bash
