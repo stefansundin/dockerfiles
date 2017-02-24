@@ -31,9 +31,8 @@ RUN rbenv global 2.4.0
 
 RUN gem install bundler
 
-# create a user with /app as home
-RUN useradd -m -d /app -p user -s /bin/bash user
-USER user
+# put the app in /app
+CMD mkdir /app
 WORKDIR /app
 
 # you may want to overwrite this in your Dockerfile
