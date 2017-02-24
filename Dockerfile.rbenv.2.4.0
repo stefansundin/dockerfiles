@@ -1,8 +1,8 @@
 # https://hub.docker.com/r/stefansundin/rbenv/
-# docker build -f Dockerfile.rbenv.2.3.0 -t stefansundin/rbenv:2.3.0 .
-# docker push stefansundin/rbenv:2.3.0
+# docker build -f Dockerfile.rbenv.2.4.0 -t stefansundin/rbenv:2.4.0 .
+# docker push stefansundin/rbenv:2.4.0
 
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -26,8 +26,8 @@ RUN mkdir $RBENV_ROOT/shims
 RUN chmod 777 $RBENV_ROOT/shims
 
 # install ruby
-RUN rbenv install 2.3.0
-RUN rbenv global 2.3.0
+RUN rbenv install 2.4.0
+RUN rbenv global 2.4.0
 
 RUN gem install bundler
 
@@ -37,8 +37,8 @@ USER user
 WORKDIR /app
 
 # you may want to overwrite this in your Dockerfile
-ENV RACK_ENV=production
+ENV RACK_ENV=deployment
 ENV RAILS_ENV=production
 
-# docker run -i -t stefansundin/rbenv:2.3.0
+# docker run -i -t stefansundin/rbenv:2.4.0
 CMD bash
