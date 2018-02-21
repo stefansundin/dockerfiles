@@ -38,6 +38,7 @@ CMD mkdir /app
 WORKDIR /app
 
 # you may want to overwrite this in your Dockerfile
+ENV APP_ENV=production
 ENV RACK_ENV=deployment
 ENV RAILS_ENV=production
 
