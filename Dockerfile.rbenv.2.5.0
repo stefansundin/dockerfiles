@@ -24,6 +24,10 @@ ENV PATH $RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH
 RUN mkdir $RBENV_ROOT/shims
 RUN chmod 777 $RBENV_ROOT/shims
 
+# we don't need gem documentation
+RUN mkdir -p $RBENV_ROOT/versions/2.5.0/etc/
+RUN echo 'gem: --no-document' >> $RBENV_ROOT/versions/2.5.0/etc/gemrc
+
 # install ruby
 RUN rbenv install 2.5.0
 RUN rbenv global 2.5.0
