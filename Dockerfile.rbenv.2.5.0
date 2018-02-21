@@ -34,6 +34,9 @@ RUN rbenv install 2.5.0
 RUN rbenv global 2.5.0
 RUN gem update --system
 
+# silence "Don't run Bundler as root."
+RUN bundle config --global silence_root_warning 1
+
 # put the app in /app
 CMD mkdir /app
 WORKDIR /app
