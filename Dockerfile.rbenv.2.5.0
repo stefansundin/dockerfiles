@@ -1,6 +1,7 @@
 # https://hub.docker.com/r/stefansundin/rbenv/
 # docker build -f Dockerfile.rbenv.2.5.0 -t stefansundin/rbenv:2.5.0 .
 # docker push stefansundin/rbenv:2.5.0
+# docker run -i -t stefansundin/rbenv:2.5.0 bash
 
 FROM ubuntu:16.04
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
@@ -41,6 +42,3 @@ WORKDIR /app
 ENV APP_ENV=production
 ENV RACK_ENV=deployment
 ENV RAILS_ENV=production
-
-# docker run -i -t stefansundin/rbenv:2.5.0
-CMD bash
