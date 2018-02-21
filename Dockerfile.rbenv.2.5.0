@@ -1,6 +1,6 @@
 # https://hub.docker.com/r/stefansundin/rbenv/
-# docker build -f Dockerfile.rbenv.2.4.0 -t stefansundin/rbenv:2.4.0 .
-# docker push stefansundin/rbenv:2.4.0
+# docker build -f Dockerfile.rbenv.2.5.0 -t stefansundin/rbenv:2.5.0 .
+# docker push stefansundin/rbenv:2.5.0
 
 FROM ubuntu:16.04
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
@@ -18,7 +18,6 @@ ENV RBENV_ROOT=/usr/local/rbenv
 RUN git clone https://github.com/rbenv/rbenv.git $RBENV_ROOT
 RUN git clone https://github.com/rbenv/ruby-build.git $RBENV_ROOT/plugins/ruby-build
 RUN git clone https://github.com/rkh/rbenv-update.git $RBENV_ROOT/plugins/rbenv-update
-#RUN git clone https://github.com/ianheggie/rbenv-binstubs.git $RBENV_ROOT/plugins/rbenv-binstubs
 ENV PATH $RBENV_ROOT/bin:$RBENV_ROOT/shims:$PATH
 
 # gem-rehash needs to be able to write to the shims directory
@@ -26,10 +25,9 @@ RUN mkdir $RBENV_ROOT/shims
 RUN chmod 777 $RBENV_ROOT/shims
 
 # install ruby
-RUN rbenv install 2.4.0
-RUN rbenv global 2.4.0
-
-RUN gem install bundler
+RUN rbenv install 2.5.0
+RUN rbenv global 2.5.0
+RUN gem update --system
 
 # put the app in /app
 CMD mkdir /app
@@ -39,5 +37,5 @@ WORKDIR /app
 ENV RACK_ENV=deployment
 ENV RAILS_ENV=production
 
-# docker run -i -t stefansundin/rbenv:2.4.0
+# docker run -i -t stefansundin/rbenv:2.5.0
 CMD bash
