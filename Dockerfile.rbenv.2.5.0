@@ -16,10 +16,9 @@ RUN apt-get install -y libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsql
 
 # install rbenv to /usr/local/rbenv
 ENV RBENV_ROOT=/usr/local/rbenv
-RUN mkdir -p $RBENV_ROOT $RBENV_ROOT/plugins/ruby-build $RBENV_ROOT/plugins/rbenv-update
+RUN mkdir -p $RBENV_ROOT $RBENV_ROOT/plugins/ruby-build
 RUN curl -L https://github.com/rbenv/rbenv/archive/master.tar.gz | tar xz --strip-components=1 -C $RBENV_ROOT
 RUN curl -L https://github.com/rbenv/ruby-build/archive/master.tar.gz | tar xz --strip-components=1 -C $RBENV_ROOT/plugins/ruby-build
-RUN curl -L https://github.com/rkh/rbenv-update/archive/master.tar.gz | tar xz --strip-components=1 -C $RBENV_ROOT/plugins/rbenv-update
 ENV PATH $RBENV_ROOT/bin:$RBENV_ROOT/shims:$RBENV_ROOT/versions/2.5.0/bin:$PATH
 
 # gem-rehash needs to be able to write to the shims directory
