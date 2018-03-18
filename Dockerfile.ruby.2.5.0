@@ -17,16 +17,16 @@ RUN apt-get install -y libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsql
 # install ruby-build
 RUN mkdir -p /usr/local/ruby-build
 RUN curl -L https://github.com/rbenv/ruby-build/archive/master.tar.gz | tar xz --strip-components=1 -C /usr/local/ruby-build
-ENV PATH /usr/local/ruby-build/bin:$PATH
+ENV PATH=/usr/local/ruby-build/bin:$PATH
 
 # we don't want gem documentation
 RUN mkdir -p /usr/local/ruby/etc
 RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 
 # install ruby
-RUN ruby-build 2.5.0 /usr/local/ruby
-ENV PATH /usr/local/ruby/bin:$PATH
-RUN gem update --system --silent
+RUN RUBY_CFLAGS=-s ruby-build 2.5.0 /usr/local/ruby
+ENV PATH=/usr/local/ruby/bin:$PATH
+RUN gem update --system
 
 # silence "Don't run Bundler as root."
 RUN bundle config --global silence_root_warning 1
