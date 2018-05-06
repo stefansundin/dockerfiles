@@ -3,17 +3,22 @@
 # docker push stefansundin/ruby:2.5.1
 # docker run -i -t stefansundin/ruby:2.5.1 bash
 
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
-# RUN apt-get upgrade -y
-# ruby-build dependencies
-RUN apt-get install -y --no-install-recommends ca-certificates curl gcc make bzip2
-# install some common gem dependencies
-RUN apt-get install -y --no-install-recommends libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev libcurl3
+# install gem dependencies
+RUN \
+  apt-get update && \
+  apt-get upgrade -y && \
+  apt-get install -y --no-install-recommends \
+    # ruby-build dependencies:
+    ca-certificates curl gcc make bzip2 \
+    # common gem dependencies:
+    libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev libcurl4 && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
 
 # install ruby-build
 RUN mkdir -p /usr/local/ruby-build
@@ -44,5 +49,3 @@ ENV RACK_ENV=deployment
 ENV RAILS_ENV=production
 
 ENV PATH=bin:$PATH
-
-RUN rm -rf /var/lib/apt/lists/*
