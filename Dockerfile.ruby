@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/stefansundin/ruby/
-# docker build --squash -f Dockerfile.ruby -t stefansundin/ruby:2.5.1 .
-# docker push stefansundin/ruby:2.5.1
-# docker run -i -t stefansundin/ruby:2.5.1 bash
+# docker build --squash -f Dockerfile.ruby -t stefansundin/ruby:2.5.3 .
+# docker push stefansundin/ruby:2.5.3
+# docker run -it stefansundin/ruby:2.5.3 bash
 
 FROM ubuntu:18.04
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
@@ -30,11 +30,11 @@ RUN mkdir -p /usr/local/ruby/etc
 RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 
 # install ruby
-RUN RUBY_CFLAGS=-s ruby-build 2.5.1 /usr/local/ruby
+RUN RUBY_CFLAGS=-s ruby-build 2.5.3 /usr/local/ruby
 ENV PATH=/usr/local/ruby/bin:$PATH
 RUN gem update --system
-# 2.5.1 requires you to "gem install bundler" again?!
-RUN gem install bundler
+# 2.5.3 requires you to "gem install bundler" again?!
+RUN gem install --force bundler
 
 # silence "Don't run Bundler as root."
 RUN bundle config --global silence_root_warning 1
