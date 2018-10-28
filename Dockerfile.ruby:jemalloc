@@ -1,7 +1,10 @@
 # https://hub.docker.com/r/stefansundin/ruby/
-# docker build --squash -f Dockerfile.ruby -t stefansundin/ruby:2.5.3 .
-# docker push stefansundin/ruby:2.5.3
-# docker run -it stefansundin/ruby:2.5.3 bash
+# docker build --squash -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:2.5.3-jemalloc .
+# docker push stefansundin/ruby:2.5.3-jemalloc
+# docker run -it stefansundin/ruby:2.5.3-jemalloc bash
+
+# validate with:
+# ruby -r rbconfig -e "puts RbConfig::CONFIG['LIBS']"
 
 FROM ubuntu:18.04
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
@@ -15,6 +18,8 @@ RUN \
   apt-get install -y --no-install-recommends \
     # ruby-build dependencies:
     ca-certificates curl gcc make bzip2 \
+    # jemalloc:
+    libjemalloc-dev \
     # common gem dependencies:
     libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev libcurl4 && \
   apt-get clean && \
@@ -32,6 +37,7 @@ RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 # install ruby
 RUN \
   RUBY_CFLAGS=-s \
+  RUBY_CONFIGURE_OPTS=--with-jemalloc \
   ruby-build 2.5.3 /usr/local/ruby
 
 ENV PATH=/usr/local/ruby/bin:$PATH
