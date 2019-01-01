@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/stefansundin/ruby/
-# docker build --squash -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:2.5.3-jemalloc .
-# docker push stefansundin/ruby:2.5.3-jemalloc
-# docker run -it stefansundin/ruby:2.5.3-jemalloc bash
+# docker build --no-cache --squash -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:2.6-jemalloc .
+# docker push stefansundin/ruby:2.6-jemalloc
+# docker run -it stefansundin/ruby:2.6-jemalloc bash
 
 # validate with:
 # ruby -r rbconfig -e "puts RbConfig::CONFIG['LIBS']"
@@ -38,11 +38,10 @@ RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 RUN \
   RUBY_CFLAGS=-s \
   RUBY_CONFIGURE_OPTS=--with-jemalloc \
-  ruby-build 2.5.3 /usr/local/ruby
+  ruby-build 2.6.0 /usr/local/ruby
 
 ENV PATH=/usr/local/ruby/bin:$PATH
 RUN gem update --system
-# 2.5.3 requires you to "gem install bundler" again?!
 RUN gem install --force bundler
 
 # silence "Don't run Bundler as root."
