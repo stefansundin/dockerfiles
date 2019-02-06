@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/stefansundin/ruby/
-# docker build --no-cache --squash -f Dockerfile.ruby -t stefansundin/ruby:2.6 .
+# docker build --pull --no-cache --squash -f Dockerfile.ruby -t stefansundin/ruby:2.6 .
 # docker push stefansundin/ruby:2.6
 # docker run -it stefansundin/ruby:2.6 bash
 
@@ -32,7 +32,7 @@ RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 # install ruby
 RUN \
   RUBY_CFLAGS=-s \
-  ruby-build 2.6.0 /usr/local/ruby
+  ruby-build 2.6.1 /usr/local/ruby
 
 ENV PATH=/usr/local/ruby/bin:$PATH
 RUN gem update --system
