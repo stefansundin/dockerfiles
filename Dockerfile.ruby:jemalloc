@@ -56,4 +56,7 @@ ENV APP_ENV=production
 ENV RACK_ENV=deployment
 ENV RAILS_ENV=production
 
+# https://devcenter.heroku.com/articles/tuning-glibc-memory-behavior
+ENV MALLOC_ARENA_MAX=2
+
 ENV PATH=bin:$PATH
