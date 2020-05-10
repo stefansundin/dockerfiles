@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/stefansundin/ruby/
-# docker build --pull --no-cache --squash -f Dockerfile.ruby -t stefansundin/ruby:2.6 .
-# docker push stefansundin/ruby:2.6
-# docker run -it stefansundin/ruby:2.6 bash
+# docker build --pull --no-cache --squash -f Dockerfile.ruby -t stefansundin/ruby:2.7 .
+# docker push stefansundin/ruby:2.7
+# docker run -it stefansundin/ruby:2.7 bash
 
 FROM ubuntu:18.04
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
@@ -32,11 +32,10 @@ RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 # install ruby
 RUN \
   RUBY_CFLAGS=-s \
-  ruby-build 2.6.5 /usr/local/ruby
+  ruby-build 2.7.1 /usr/local/ruby
 
 ENV PATH=/usr/local/ruby/bin:$PATH
 RUN gem update --system
-RUN gem install --force bundler
 
 # silence "Don't run Bundler as root."
 RUN bundle config --global silence_root_warning 1

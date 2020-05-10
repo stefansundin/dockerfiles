@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/stefansundin/ruby/
-# docker build --pull --no-cache --squash -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:2.6-jemalloc .
-# docker push stefansundin/ruby:2.6-jemalloc
-# docker run -it stefansundin/ruby:2.6-jemalloc bash
+# docker build --pull --no-cache --squash -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:2.7-jemalloc .
+# docker push stefansundin/ruby:2.7-jemalloc
+# docker run -it stefansundin/ruby:2.7-jemalloc bash
 
 # validate with:
 # ruby -r rbconfig -e "puts RbConfig::CONFIG['LIBS']"
@@ -38,11 +38,10 @@ RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 RUN \
   RUBY_CFLAGS=-s \
   RUBY_CONFIGURE_OPTS=--with-jemalloc \
-  ruby-build 2.6.5 /usr/local/ruby
+  ruby-build 2.7.1 /usr/local/ruby
 
 ENV PATH=/usr/local/ruby/bin:$PATH
 RUN gem update --system
-RUN gem install --force bundler
 
 # silence "Don't run Bundler as root."
 RUN bundle config --global silence_root_warning 1
