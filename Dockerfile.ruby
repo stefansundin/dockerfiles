@@ -1,9 +1,4 @@
-# https://hub.docker.com/r/stefansundin/ruby/
-# docker build --pull --no-cache --squash -f Dockerfile.ruby -t stefansundin/ruby:2.7 .
-# docker push stefansundin/ruby:2.7
-# docker run -it stefansundin/ruby:2.7 bash
-
-FROM ubuntu:18.04
+FROM debian:buster
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -14,7 +9,7 @@ RUN \
   apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
     # ruby-build dependencies:
-    ca-certificates curl gcc make bzip2 \
+    ca-certificates curl gcc make bzip2 zlib1g-dev \
     # common gem dependencies:
     libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev libcurl4 \
     # support git source in Gemfile:
@@ -22,12 +17,15 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
+# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=923479
+RUN c_rehash
+
 # install ruby-build
 RUN mkdir -p /usr/local/ruby-build
 RUN curl -L https://github.com/rbenv/ruby-build/archive/master.tar.gz | tar xz --strip-components=1 -C /usr/local/ruby-build
 ENV PATH=/usr/local/ruby-build/bin:$PATH
 
-# we don't want gem documentation
+# skip gem documentation
 RUN mkdir -p /usr/local/ruby/etc
 RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 
