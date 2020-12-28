@@ -32,7 +32,7 @@ RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 # install ruby
 RUN \
   RUBY_CFLAGS=-s \
-  ruby-build 2.7.1 /usr/local/ruby
+  ruby-build 3.0.0 /usr/local/ruby
 
 ENV PATH=/usr/local/ruby/bin:$PATH
 RUN gem update --system
