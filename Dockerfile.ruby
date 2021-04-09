@@ -1,6 +1,7 @@
 FROM debian:buster
 MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
 
+ENV RUBY_VERSION=3.0.1
 ENV DEBIAN_FRONTEND=noninteractive
 
 # install gem dependencies
@@ -32,7 +33,7 @@ RUN echo 'gem: --no-document' >> /usr/local/ruby/etc/gemrc
 # install ruby
 RUN \
   RUBY_CFLAGS=-s \
-  ruby-build 3.0.0 /usr/local/ruby
+  ruby-build $RUBY_VERSION /usr/local/ruby
 
 ENV PATH=/usr/local/ruby/bin:$PATH
 RUN gem update --system
