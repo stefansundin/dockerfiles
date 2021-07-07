@@ -7,7 +7,7 @@ Warning: Building this takes about 2 hours.
 ```
 # pre-requisite:
 docker buildx create --use --name multiarch
-docker pull debian:buster
+docker pull debian:bullseye-slim
 
 # build and push:
 # optional arguments: --pull --no-cache

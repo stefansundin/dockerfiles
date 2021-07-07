@@ -1,5 +1,6 @@
-FROM debian:buster
-MAINTAINER stefansundin https://github.com/stefansundin/dockerfiles
+FROM debian:bullseye-slim
+LABEL org.opencontainers.image.authors="Stefan Sundin"
+LABEL org.opencontainers.image.url="https://github.com/stefansundin/dockerfiles"
 
 ENV RUBY_VERSION=3.0.1
 ENV DEBIAN_FRONTEND=noninteractive
@@ -17,9 +18,6 @@ RUN \
     git && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
-
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=923479
-RUN c_rehash
 
 # install ruby-build
 RUN mkdir -p /usr/local/ruby-build
