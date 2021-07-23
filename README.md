@@ -6,7 +6,7 @@ Warning: Building this takes about 2 hours.
 
 ```
 # pre-requisite:
-docker buildx create --use --name multiarch
+docker buildx create --use --name multiarch --node multiarch0
 docker pull debian:bullseye-slim
 
 # build and push:
