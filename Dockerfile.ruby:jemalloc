@@ -2,7 +2,7 @@ FROM debian:bullseye-slim
 LABEL org.opencontainers.image.authors="Stefan Sundin"
 LABEL org.opencontainers.image.url="https://github.com/stefansundin/dockerfiles"
 
-ENV RUBY_VERSION=3.0.2
+ENV RUBY_VERSION=3.0.3
 ENV DEBIAN_FRONTEND=noninteractive
 
 # install gem dependencies
