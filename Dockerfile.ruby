@@ -13,7 +13,7 @@ RUN \
     # ruby-build dependencies:
     ca-certificates curl gcc make bzip2 zlib1g-dev \
     # common gem dependencies:
-    libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev libcurl4 \
+    libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev libcurl4 xz-utils \
     # support git source in Gemfile:
     git && \
   apt-get clean && \
