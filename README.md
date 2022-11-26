@@ -7,12 +7,11 @@ Warning: Building this takes about 2 hours.
 ```
 # pre-requisite:
 docker buildx create --use --name multiarch --node multiarch0
-docker pull debian:bullseye-slim
 
 # build and push:
-# optional arguments: --pull --no-cache
-docker buildx build -f Dockerfile.ruby -t stefansundin/ruby:3.1 --platform linux/amd64,linux/arm64,linux/arm/v7 --push .
-docker buildx build -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.1-jemalloc --platform linux/amd64,linux/arm64,linux/arm/v7 --push .
+# optional arguments: --no-cache
+docker buildx build --pull -f Dockerfile.ruby -t stefansundin/ruby:3.1 --platform linux/amd64,linux/arm64,linux/arm/v7 --push .
+docker buildx build --pull -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.1-jemalloc --platform linux/amd64,linux/arm64,linux/arm/v7 --push .
 
 # run:
 docker run -it stefansundin/ruby:3.1 bash
