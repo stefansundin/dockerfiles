@@ -12,12 +12,16 @@ RUN \
   apt-get install -y --no-install-recommends \
     # ruby-build dependencies:
     ca-certificates curl gcc make bzip2 zlib1g-dev libyaml-dev \
+    # yjit:
+    rustc \
     # common gem dependencies:
     libreadline-dev libxml2-dev libxslt1-dev libpq-dev libsqlite3-dev libssl-dev libcurl4 xz-utils \
     # support git source in Gemfile:
     git && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
+
+RUN rustc --version
 
 # install ruby-build
 RUN mkdir -p /usr/local/ruby-build
