@@ -10,6 +10,8 @@ RUN \
   apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
+    # useful system utilities when debugging:
+    vim less \
     # ruby-build dependencies:
     ca-certificates curl gcc make bzip2 zlib1g-dev libyaml-dev \
     # yjit:
