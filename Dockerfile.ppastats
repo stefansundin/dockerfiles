@@ -19,3 +19,5 @@ RUN \
   rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /root/.ppastats
+
+ENTRYPOINT [ "ppastats" ]
