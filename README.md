@@ -11,8 +11,8 @@ RUBYOPT="--yjit"
 Validate with:
 
 ```shell
-$ docker run -e RUBYOPT="--yjit" -it stefansundin/ruby:3.3 ruby -e "puts RUBY_DESCRIPTION"
-ruby 3.3.0 (2023-12-25 revision 5124f9ac75) +YJIT [aarch64-linux]
+$ docker run --pull always -e RUBYOPT="--yjit" -it stefansundin/ruby:3.3 ruby -e "puts RUBY_DESCRIPTION"
+ruby 3.3.1 (2024-04-23 revision c56cd86388) +YJIT [aarch64-linux]
 ```
 
 # Multi-arch build
