@@ -12,7 +12,7 @@ Validate with:
 
 ```shell
 $ docker run --pull always -e RUBYOPT="--yjit" -it stefansundin/ruby:3.3 ruby -e "puts RUBY_DESCRIPTION"
-ruby 3.3.1 (2024-04-23 revision c56cd86388) +YJIT [aarch64-linux]
+ruby 3.3.2 (2024-05-30 revision e5a195edf6) +YJIT [aarch64-linux]
 ```
 
 # Multi-arch build
@@ -25,8 +25,8 @@ docker buildx create --use --name multiarch --node multiarch0
 
 # build and push:
 # optional arguments: --no-cache
-docker buildx build --progress plain --pull -f Dockerfile.ruby -t stefansundin/ruby:3.3 --platform linux/amd64,linux/arm64,linux/arm/v7 --push .
-docker buildx build --progress plain --pull -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.3-jemalloc --platform linux/amd64,linux/arm64,linux/arm/v7 --push .
+docker buildx build --progress plain --pull --push -f Dockerfile.ruby -t stefansundin/ruby:3.3 --platform linux/amd64,linux/arm64,linux/arm/v7 .
+docker buildx build --progress plain --pull --push -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.3-jemalloc --platform linux/amd64,linux/arm64,linux/arm/v7 .
 
 # run:
 docker run -it stefansundin/ruby:3.3 bash
