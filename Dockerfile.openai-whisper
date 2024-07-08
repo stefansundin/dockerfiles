@@ -1,0 +1,13 @@
+# docker buildx build --progress plain --pull -f Dockerfile.openai-whisper -t stefansundin/openai-whisper --platform linux/amd64,linux/arm64 --push .
+# docker run --rm -v $HOME/whisper-cache:/root/.cache/whisper -v $PWD:/data stefansundin/openai-whisper --task translate file.mp4
+
+FROM python:3-slim-bookworm
+
+RUN apt-get update && apt-get install -y git ffmpeg
+
+RUN pip install git+https://github.com/openai/whisper.git
+
+RUN mkdir /data
+WORKDIR /data
+
+ENTRYPOINT ["whisper"]
