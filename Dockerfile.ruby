@@ -46,7 +46,7 @@ RUN gem update --system
 RUN bundle config --global silence_root_warning 1
 
 # put the app in /app
-CMD mkdir /app
+RUN mkdir -p /app
 WORKDIR /app
 
 # you may want to override this in your Dockerfile
