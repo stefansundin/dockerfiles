@@ -2,7 +2,7 @@ FROM debian:bookworm-slim
 LABEL org.opencontainers.image.authors="Stefan Sundin"
 LABEL org.opencontainers.image.url="https://github.com/stefansundin/dockerfiles"
 
-ENV RUBY_VERSION=3.3.4
+ENV RUBY_VERSION=3.3.5
 ENV DEBIAN_FRONTEND=noninteractive
 
 # install gem dependencies
