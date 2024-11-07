@@ -12,7 +12,7 @@ Validate with:
 
 ```shell
 $ docker run --rm --pull always -e RUBYOPT="--yjit" -it stefansundin/ruby:3.3 ruby -e "puts RUBY_DESCRIPTION"
-ruby 3.3.5 (2024-09-03 revision ef084cc8f4) +YJIT [aarch64-linux]
+ruby 3.3.6 (2024-11-05 revision 75015d4c1f) +YJIT [aarch64-linux]
 ```
 
 # Multi-arch build
