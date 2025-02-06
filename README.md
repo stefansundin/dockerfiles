@@ -11,8 +11,8 @@ RUBYOPT="--yjit"
 Validate with:
 
 ```shell
-$ docker run --rm --pull always -e RUBYOPT="--yjit" -it stefansundin/ruby:3.3 ruby -e "puts RUBY_DESCRIPTION"
-ruby 3.3.6 (2024-11-05 revision 75015d4c1f) +YJIT [aarch64-linux]
+$ docker run --rm --pull always -e RUBYOPT="--yjit" -it stefansundin/ruby:3.4 ruby -e "puts RUBY_DESCRIPTION"
+ruby 3.4.1 (2024-12-25 revision 48d4efcb85) +YJIT +PRISM [aarch64-linux]
 ```
 
 # Multi-arch build
@@ -25,25 +25,25 @@ docker buildx create --use --name multiarch --node multiarch0
 
 # build and push:
 # optional arguments: --no-cache
-docker buildx build --progress plain --pull --push -f Dockerfile.ruby -t stefansundin/ruby:3.3 --platform linux/amd64,linux/arm64,linux/arm/v7 .
-docker buildx build --progress plain --pull --push -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.3-jemalloc --platform linux/amd64,linux/arm64,linux/arm/v7 .
+docker buildx build --progress plain --pull --push -f Dockerfile.ruby -t stefansundin/ruby:3.4 --platform linux/amd64,linux/arm64,linux/arm/v7 .
+docker buildx build --progress plain --pull --push -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.4-jemalloc --platform linux/amd64,linux/arm64,linux/arm/v7 .
 
 # run:
-docker run --rm -it stefansundin/ruby:3.3 bash
+docker run --rm -it stefansundin/ruby:3.4 bash
 ```
 
 # Standard build
 
 ```shell
-docker build --progress plain --pull --no-cache -f Dockerfile.ruby -t stefansundin/ruby:3.3-test .
-docker run --rm -it stefansundin/ruby:3.3-test bash
+docker build --progress plain --pull --no-cache -f Dockerfile.ruby -t stefansundin/ruby:3.4-test .
+docker run --rm -it stefansundin/ruby:3.4-test bash
 ```
 
 jemalloc:
 
 ```shell
-docker build --pull --no-cache --squash -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.3-test-jemalloc .
-docker run --rm -it stefansundin/ruby:3.3-test-jemalloc bash
+docker build --pull --no-cache --squash -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.4-test-jemalloc .
+docker run --rm -it stefansundin/ruby:3.4-test-jemalloc bash
 
 # validate with:
 ruby -r rbconfig -e "puts RbConfig::CONFIG['MAINLIBS']"
