@@ -4,6 +4,7 @@ LABEL org.opencontainers.image.url="https://github.com/stefansundin/dockerfiles"
 
 ENV RUBY_VERSION=3.4.1
 ENV DEBIAN_FRONTEND=noninteractive
+ENV LC_ALL=C.UTF-8
 
 # install gem dependencies
 RUN \
