@@ -25,8 +25,8 @@ docker buildx create --use --name multiarch --node multiarch0
 
 # build and push:
 # optional arguments: --no-cache
-docker buildx build --progress plain --pull --push -f Dockerfile.ruby -t stefansundin/ruby:3.4 --platform linux/amd64,linux/arm64,linux/arm/v7 .
-docker buildx build --progress plain --pull --push -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.4-jemalloc --platform linux/amd64,linux/arm64,linux/arm/v7 .
+docker buildx build --progress plain --pull --push -f Dockerfile.ruby -t stefansundin/ruby:3.4 --platform linux/amd64,linux/arm64,linux/riscv64 .
+docker buildx build --progress plain --pull --push -f Dockerfile.ruby:jemalloc -t stefansundin/ruby:3.4-jemalloc --platform linux/amd64,linux/arm64,linux/riscv64 .
 
 # run:
 docker run --rm -it stefansundin/ruby:3.4 bash
